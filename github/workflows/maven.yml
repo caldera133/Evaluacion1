@@ -1,0 +1,24 @@
+name: Compilación y Pruebas
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'  # Ejecutar cada 6 horas
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout del código
+      uses: actions/checkout@v2
+
+    - name: Configurar JDK 11
+      uses: actions/setup-java@v2
+      with:
+        distribution: 'adopt'
+        java-version: '11'
+
+    - name: Compilar y ejecutar pruebas
+      run: |
+        mvn compile
+        mvn test
